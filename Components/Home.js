@@ -1,14 +1,19 @@
 import React from 'react';
-import { Flatlist, StyleSheet, View, Text } from 'react-native';
+import { FlatList, StyleSheet, View, Text } from 'react-native';
 import { getCardsByDate } from '../Api/ScryfallApi';
 
 export default class Home extends React.Component {
 
-    state = {
-        cards: []
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            cards: []
+        };
+    }
 
+    // Call Scryfall Api and set cards state with result
     _loadCards() {
+        console.log("Load cards");
         getCardsByDate(1).then(responseJson => {
             this.setState({
                 cards: responseJson.data
@@ -16,11 +21,31 @@ export default class Home extends React.Component {
         });
     }
 
+    _displayListOfCards() {
+        if (this.state.cards.length > 0) {
+            return (
+                <FlatList
+                    data={this.state.cards}
+                    keyExtractor={item => item.id.toString()}
+                    renderItem={({ item }) => (
+                        <View style={styles.main_container}>
+                            <Text>{item.name}</Text>
+                        </View>
+                    )}
+                />
+            )
+        }
+    }
+
+    componentDidMount(){
+        this._loadCards();
+    }
+
     render() {
         console.log("Render : Home");
         return(
             <View style={styles.main_container}>
-                <Text>Hello !!!!</Text>
+                {this._displayListOfCards()}
             </View>
         )
     }
