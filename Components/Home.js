@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList, StyleSheet, View, Text } from 'react-native';
-import { getCardsByDate } from '../Api/ScryfallApi';
+import { getCardsByDate } from '../Api/ScryfallApi';
+import CardItem from './CardItem';
 
 export default class Home extends React.Component {
 
@@ -27,11 +28,7 @@ export default class Home extends React.Component {
                 <FlatList
                     data={this.state.cards}
                     keyExtractor={item => item.id.toString()}
-                    renderItem={({ item }) => (
-                        <View style={styles.main_container}>
-                            <Text>{item.name}</Text>
-                        </View>
-                    )}
+                    renderItem={({ item }) => <CardItem card={item}/>}
                 />
             )
         }
