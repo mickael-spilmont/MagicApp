@@ -12,23 +12,24 @@ export default class Home extends React.Component {
         };
     }
 
-    // Call Scryfall Api and set cards state with result
+    // Call Scryfall Api and set cards state with result (Verify the Api response)
     _loadCards() {
         console.log("Load cards");
         getCardsByDate(1).then(responseJson => {
             this.setState({
-                cards: responseJson.data
+                cards: responseJson.data // ternaire possibe || [] ?
             });
         });
     }
 
+    // Display list of cardItem, double faced cards are not represented (card_faces !== undefined)
     _displayListOfCards() {
         if (this.state.cards.length > 0) {
             return (
                 <FlatList
                     data={this.state.cards}
                     keyExtractor={item => item.id.toString()}
-                    renderItem={({ item }) => <CardItem card={item}/>}
+                    renderItem={({ item }) => !item.card_faces ? <CardItem card={item}/> : null}
                 />
             )
         }
