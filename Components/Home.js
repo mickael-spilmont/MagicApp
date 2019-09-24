@@ -12,13 +12,16 @@ export default class Home extends React.Component {
         };
     }
 
-    // Call Scryfall Api and set cards state with result (Verify the Api response)
+    // Call Scryfall Api and set cards state with result, after verify the Api response
     _loadCards() {
         console.log("Load cards");
         getCardsByDate(1).then(responseJson => {
-            this.setState({
-                cards: responseJson.data // ternaire possibe || [] ?
-            });
+            
+            if (responseJson.object !== "error") {
+                this.setState({
+                    cards: responseJson.data
+                });
+            }
         });
     }
 
@@ -33,6 +36,13 @@ export default class Home extends React.Component {
                 />
             )
         }
+        else if(this.state.cards.length === 0) {
+            return (
+                <View style={styles.error_container}>
+                    <Text style={styles.error_text}>Sorry, no result found</Text>
+                </View> 
+            )
+        }   
     }
 
     componentDidMount(){
@@ -52,5 +62,14 @@ export default class Home extends React.Component {
 const styles = StyleSheet.create({
     main_container: {
         flex: 1
+    },
+    error_container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    error_text: {
+        fontSize: 18,
+        fontWeight: "bold"
     }
 });

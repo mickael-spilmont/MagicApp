@@ -21,12 +21,12 @@ export default class CardItem extends React.Component{
                 <View style={styles.data_container}>
 
                     <View style={styles.header_container}>
-                        <Text style={styles.name_text}>{card.name}</Text>
+                        <Text style={styles.name_text} numberOfLines={2}>{card.name}</Text>
                         <Text>{card.mana_cost}</Text>
                     </View>
 
                     <View style={styles.description_container}>
-                        <Text style={styles.type_text}>{card.type_line}</Text>
+                        <Text style={styles.type_text} numberOfLines={2}>{card.type_line}</Text>
                         {/* if card hasn't power score, allows more oracle text  */}
                         <Text style={styles.oracle_text} numberOfLines={card.power ? 6 : 8}>{card.oracle_text}</Text>
                     </View>
@@ -61,14 +61,14 @@ const styles = StyleSheet.create({
     },
     name_text: {
         fontWeight: "bold",
-        fontSize: 20,
+        fontSize: 18,
         flex: 1,
         flexWrap: 'wrap',
         paddingRight: 5,
         paddingBottom: 5
     },
     description_container: {
-        flex: 1
+        flex: 6 
     },
     type_text: {
         fontWeight: "bold",
@@ -76,7 +76,8 @@ const styles = StyleSheet.create({
         paddingBottom: 3
     },
     oracle_text: {
-        fontSize: 12
+        fontSize: 12,
+        textAlign: "justify"
     },
     power_text: {
         fontSize: 14,
