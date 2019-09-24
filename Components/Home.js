@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, StyleSheet, View, Text } from 'react-native';
+import { FlatList, StyleSheet, View, Text, ActivityIndicator } from 'react-native';
 import { getCardsByDate } from '../Api/ScryfallApi';
 import CardItem from './CardItem';
 
@@ -8,7 +8,8 @@ export default class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            cards: []
+            cards: [],
+            isLoading: true
         };
     }
 
@@ -19,15 +20,27 @@ export default class Home extends React.Component {
             
             if (responseJson.object !== "error") {
                 this.setState({
-                    cards: responseJson.data
+                    cards: responseJson.data,
+                    isLoading: false
                 });
             }
         });
     }
 
+    // Display activity indicator while Api doesn't return response
+    _displayLoading() {
+        if (this.state.isLoading) {
+            return(
+                <View style={styles.activity_container}>
+                    <ActivityIndicator size="large"/>
+                </View>
+            )
+        }
+    }
+
     // Display list of cardItem, double faced cards are not represented (card_faces !== undefined)
     _displayListOfCards() {
-        if (this.state.cards.length > 0) {
+        if (!this.state.isLoading) {
             return (
                 <FlatList
                     data={this.state.cards}
@@ -35,14 +48,7 @@ export default class Home extends React.Component {
                     renderItem={({ item }) => !item.card_faces ? <CardItem card={item}/> : null}
                 />
             )
-        }
-        else if(this.state.cards.length === 0) {
-            return (
-                <View style={styles.error_container}>
-                    <Text style={styles.error_text}>Sorry, no result found</Text>
-                </View> 
-            )
-        }   
+        }  
     }
 
     componentDidMount(){
@@ -54,6 +60,7 @@ export default class Home extends React.Component {
         return(
             <View style={styles.main_container}>
                 {this._displayListOfCards()}
+                {this._displayLoading()}
             </View>
         )
     }
@@ -62,6 +69,11 @@ export default class Home extends React.Component {
 const styles = StyleSheet.create({
     main_container: {
         flex: 1
+    },
+    activity_container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
     },
     error_container: {
         flex: 1,
