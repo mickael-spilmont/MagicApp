@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         paddingBottom: 5
     },
     description_container: {
-        flex: 6 
+        flex: 1 
     },
     type_text: {
         fontWeight: "bold",
