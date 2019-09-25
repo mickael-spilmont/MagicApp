@@ -4,11 +4,16 @@ import { StyleSheet, View, Text, Image } from 'react-native';
 export default class CardItem extends React.Component{
 
     // If card has power and toughness return this score
-    _stats(card) {
+    _displayStats() {
+        const card = this.props.card;
         if (card.power && card.toughness) {
-            return(
-                <Text style={styles.power_text}>{card.power}/{card.toughness}</Text>
-            )
+            return <Text style={styles.stats_text}>{card.power}/{card.toughness}</Text>
+        }
+        else if (card.loyalty) {
+            return <Text style={styles.stats_text}>{card.loyalty}</Text>
+        }
+        else {
+            return null;
         }
     }
 
@@ -16,9 +21,9 @@ export default class CardItem extends React.Component{
     _isCreature() {
         const card = this.props.card
         if (card.power || card.toughness || card.loyalty) {
-            return 6;
+            return 8;
         }
-        return 8;
+        return 10;
     }
 
     render() {
@@ -35,13 +40,14 @@ export default class CardItem extends React.Component{
                     </View>
 
                     <View style={styles.description_container}>
-                        <Text style={styles.type_text} numberOfLines={2}>{card.type_line}</Text>
+                        <Text style={styles.type_text} numberOfLines={1}>{card.type_line}</Text>
                         {/* if card hasn't power score, allows more oracle text  */}
                         <Text style={styles.oracle_text} numberOfLines={this._isCreature()}>{card.oracle_text}</Text>
+                        {this._displayStats()}
                     </View>
                     
                     {/* show stats if necessary */}
-                    {this._stats(card)}
+                    {/* {this._stats()} */}
                 
                 </View>
             </View>
@@ -85,10 +91,11 @@ const styles = StyleSheet.create({
         paddingBottom: 3
     },
     oracle_text: {
+        flex: 1,
         fontSize: 12,
         textAlign: "justify"
     },
-    power_text: {
+    stats_text: {
         fontSize: 14,
         fontWeight: "bold",
         textAlign: "right"
