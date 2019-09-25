@@ -13,9 +13,12 @@ export default class Home extends React.Component {
         };
     }
 
+    _goToCardDetails = (card) => {
+        this.props.navigation.navigate('CardDetails', {card: card});
+    }
+
     // Call Scryfall Api and set cards state with result, after verify the Api response
     _loadCards() {
-        console.log("Load cards");
         getCardsByDate(1).then(responseJson => {
             
             if (responseJson.object !== "error") {
@@ -38,14 +41,15 @@ export default class Home extends React.Component {
         }
     }
 
-    // Display list of cardItem, double faced cards are not represented (card_faces !== undefined)
+    // Display list of cardItem
     _displayListOfCards() {
         if (!this.state.isLoading) {
             return (
                 <FlatList
                     data={this.state.cards}
                     keyExtractor={item => item.id.toString()}
-                    renderItem={({ item }) => !item.card_faces ? <CardItem card={item}/> : null}
+                    // Double faced cards are not represented (card_faces !== undefined) improvement required
+                    renderItem={({ item }) => !item.card_faces ? <CardItem card={item} goToCardDetails={this._goToCardDetails}/> : null}
                 />
             )
         }  
@@ -56,7 +60,7 @@ export default class Home extends React.Component {
     }
 
     render() {
-        console.log("Render : Home");
+        console.log(this.props.navigation);
         return(
             <View style={styles.main_container}>
                 {this._displayListOfCards()}

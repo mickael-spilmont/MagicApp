@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default class CardItem extends React.Component{
 
@@ -30,7 +31,7 @@ export default class CardItem extends React.Component{
         // Verify if card is not null
         const card = this.props.card;
         return(
-            <View style={styles.main_container}>
+            <TouchableOpacity style={styles.main_container} onPress={() => this.props.goToCardDetails(card)}>
                 <Image style={styles.image} source={{uri : card.image_uris.small}} />
                 <View style={styles.data_container}>
 
@@ -45,12 +46,9 @@ export default class CardItem extends React.Component{
                         <Text style={styles.oracle_text} numberOfLines={this._isCreature()}>{card.oracle_text}</Text>
                         {this._displayStats()}
                     </View>
-                    
-                    {/* show stats if necessary */}
-                    {/* {this._stats()} */}
                 
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
 }

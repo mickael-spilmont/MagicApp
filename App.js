@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-import Home from './Components/Home'
+import { StyleSheet, View } from 'react-native';
 import Navigation from './Navigation/Navigation';
 
 export default function App() {
