@@ -1,12 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import Home from './Components/Home'
+import Navigation from './Navigation/Navigation';
 
 export default function App() {
 
   return (
     <View style={styles.container}>
-      <Home/>
+      <Navigation/>
     </View>
   );
 }
