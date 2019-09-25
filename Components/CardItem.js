@@ -21,7 +21,7 @@ export default class CardItem extends React.Component{
     _isCreature() {
         const card = this.props.card
         if (card.power || card.toughness || card.loyalty) {
-            return 8;
+            return 7;
         }
         return 10;
     }
