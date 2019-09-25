@@ -12,6 +12,15 @@ export default class CardItem extends React.Component{
         }
     }
 
+    // Change the number of oracle line according to card type 
+    _isCreature() {
+        const card = this.props.card
+        if (card.power || card.toughness || card.loyalty) {
+            return 6;
+        }
+        return 8;
+    }
+
     render() {
         // Verify if card is not null
         const card = this.props.card;
@@ -28,7 +37,7 @@ export default class CardItem extends React.Component{
                     <View style={styles.description_container}>
                         <Text style={styles.type_text} numberOfLines={2}>{card.type_line}</Text>
                         {/* if card hasn't power score, allows more oracle text  */}
-                        <Text style={styles.oracle_text} numberOfLines={card.power ? 6 : 8}>{card.oracle_text}</Text>
+                        <Text style={styles.oracle_text} numberOfLines={this._isCreature()}>{card.oracle_text}</Text>
                     </View>
                     
                     {/* show stats if necessary */}
