@@ -24,7 +24,7 @@ export default class CardItem extends React.Component{
         if (card.power || card.toughness || card.loyalty) {
             return 7;
         }
-        return 10;
+        return 9;
     }
 
     render() {

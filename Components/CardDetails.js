@@ -13,8 +13,6 @@ export default class CardDetails extends React.Component {
     }
 }
 
-const taille = 30;
-
 const styles = StyleSheet.create({
     main_container: {
         flex: 1,
