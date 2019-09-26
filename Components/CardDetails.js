@@ -1,14 +1,28 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Image, Dimensions } from 'react-native';
 
 export default class CardDetails extends React.Component {
     
     render() {
         const card = this.props.navigation.getParam('card');
         return(
-            <View>
-                <Text>{card.name}</Text>
+            <View style={styles.main_container}>
+                <Image style={styles.image} source={{uri: card.image_uris.png}}/>
             </View>
         )
     }
 }
+
+const taille = 30;
+
+const styles = StyleSheet.create({
+    main_container: {
+        flex: 1,
+        backgroundColor: '#2a2b2b',
+    },
+    image: {
+        height: '100%',
+        resizeMode: 'contain',
+        margin: 5,
+    },
+})
