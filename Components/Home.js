@@ -41,6 +41,13 @@ export default class Home extends React.Component {
         }
     }
 
+    // Return CardItem component if item is not udefined and card is not double faced
+    _displayItem(item) {
+        if(item && !item.card_faces) {
+            return <CardItem card={item} goToCardDetails={this._goToCardDetails}/>
+        }
+    }
+
     // Display list of cardItem
     _displayListOfCards() {
         if (!this.state.isLoading) {
@@ -48,8 +55,7 @@ export default class Home extends React.Component {
                 <FlatList
                     data={this.state.cards}
                     keyExtractor={item => item.id.toString()}
-                    // Double faced cards are not represented (card_faces !== undefined) improvement required
-                    renderItem={({ item }) => !item.card_faces ? <CardItem card={item} goToCardDetails={this._goToCardDetails}/> : null}
+                    renderItem={({ item }) => this._displayItem(item)}
                 />
             )
         }  

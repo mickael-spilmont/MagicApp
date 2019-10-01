@@ -27,12 +27,27 @@ export default class CardItem extends React.Component{
         return 9;
     }
 
+    // Control uris of card and return image or gray rectangle
+    _displayImage() {
+        const card = this.props.card;
+        if(card.image_uris && card.image_uris.small) {
+            return <Image style={styles.image} source={{uri : card.image_uris.small}} />
+        }
+        else {
+            return(
+                <View style={styles.missing_image}>
+                    <Text>Missing image</Text>
+                </View>
+            )
+        }
+    }
+
     render() {
-        // Verify if card is not null
         const card = this.props.card;
         return(
             <TouchableOpacity style={styles.main_container} onPress={() => this.props.goToCardDetails(card)}>
-                <Image style={styles.image} source={{uri : card.image_uris.small}} />
+                {/* <Image style={styles.image} source={{uri : card.image_uris.small}} /> */}
+                {this._displayImage()}
                 <View style={styles.data_container}>
 
                     <View style={styles.header_container}>
@@ -62,6 +77,18 @@ const styles = StyleSheet.create({
         width: 146,
         height: 204,
         margin : 5
+    },
+    missing_image: {
+        width: 146,
+        height: 204,
+        margin: 5,
+        backgroundColor: '#DDDDDD'
+    },
+    missing_text: {
+        fontSize: 12,
+        flex: 1,
+        textAlign: 'center',
+        textAlignVertical: 'center'
     },
     data_container: {
         flex: 1,
