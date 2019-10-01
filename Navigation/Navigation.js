@@ -30,6 +30,14 @@ const HomeStackNavigator = createStackNavigator(
     }
 );
 
+const SearchStackNavigator = createStackNavigator(
+    {
+        Search: {
+            screen: Search,
+        }
+    }
+)
+
 const AppTabNavigator = createBottomTabNavigator(
     {
         Home: {
@@ -41,7 +49,7 @@ const AppTabNavigator = createBottomTabNavigator(
             }
         },
         Search: {
-            screen: Search,
+            screen: SearchStackNavigator,
             navigationOptions: {
                 tabBarIcon: () => {
                     return <Image source={require('../Icons/search_black_36dp.png')} style={styles.menu_icon}/>
