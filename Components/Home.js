@@ -41,9 +41,9 @@ export default class Home extends React.Component {
         }
     }
 
-    // Return CardItem component if item is not udefined and card is not double faced
+    // Return CardItem component if item is not udefined, and card have image uris and card is not double faced
     _displayItem(item) {
-        if(item && !item.card_faces) {
+        if(item && item.image_uris && !item.card_faces) {
             return <CardItem card={item} goToCardDetails={this._goToCardDetails}/>
         }
     }
