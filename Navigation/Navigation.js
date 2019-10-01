@@ -1,13 +1,11 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, Button, StyleSheet, Image } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Home from '../Components/Home';
 import CardDetails from '../Components/CardDetails';
-import FavoriteCards from '../Components/FavoriteCards';
-// import { TouchableOpacity } from 'react-native-gesture-handler';
-console.log(styles);
+import Search from '../Components/Search';
 
 const HomeStackNavigator = createStackNavigator(
     {
@@ -15,12 +13,6 @@ const HomeStackNavigator = createStackNavigator(
             screen: Home,
             navigationOptions: {
                 title: "Latest Magic cards",
-                headerLeft: (
-                    <Image
-                        source={require('../Icons/menu-24px.svg')} style={{width: 24, height: 24}}
-                    //    style={styles.menu_icon}
-                    />
-                )
             }
         },
         CardDetails: {
@@ -38,24 +30,40 @@ const HomeStackNavigator = createStackNavigator(
     }
 );
 
-const AppDrawerNavigator = createDrawerNavigator(
+const AppTabNavigator = createBottomTabNavigator(
     {
         Home: {
             screen: HomeStackNavigator,
+            navigationOptions: {
+                tabBarIcon: () => {
+                    return <Image source={require('../Icons/home_black_36dp.png')} style={styles.menu_icon}/>
+                }
+            }
         },
-        Favorite: {
-            screen: FavoriteCards
+        Search: {
+            screen: Search,
+            navigationOptions: {
+                tabBarIcon: () => {
+                    return <Image source={require('../Icons/search_black_36dp.png')} style={styles.menu_icon}/>
+                }
+            }
         }
+    },
+    {
+        tabBarOptions: {
+            activeBackgroundColor: '#DDDDDD',
+            inactiveBackgroundColor: '#FFFFFF',
+            showLabel: false,
+            shoIcon: true,
+        },
     }
 )
 
 const styles = StyleSheet.create({
     menu_icon: {
-        width: 24,
-        height: 24,
+        width: 36,
+        height: 36,
     }
 })
 
-console.log(styles);
-
-export default createAppContainer(AppDrawerNavigator);
+export default createAppContainer(AppTabNavigator);
