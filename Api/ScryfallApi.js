@@ -5,7 +5,7 @@ export function getCardsByDate(page) {
 }
 
 export function searchCardByNAme(cardName) {
-    return fetch(`https://api.scryfall.com/cards/named?fuzzy=${cardName}`)
+    return fetch(`https://api.scryfall.com/cards/search?q=${cardName}`)
         .then(response => response.json())
         .catch(error => console.error(error));
 }
