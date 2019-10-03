@@ -9,7 +9,14 @@
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "android": {
+      "package": "com.odd_otocyon.magic_the_gathering_app"
+    },
+    "ios": {
+      "bundleIdentifier": "com.odd_otocyon.magic_the_gathering_app",
+      "supportsTablet": true
+    },
+    "version": "0.5.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -22,9 +29,6 @@
     },
     "assetBundlePatterns": [
       "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    }
+    ]
   }
 }
