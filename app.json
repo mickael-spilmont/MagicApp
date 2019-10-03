@@ -10,10 +10,10 @@
       "web"
     ],
     "android": {
-      "package": "com.odd_otocyon.magic_the_gathering_app"
+      "package": "com.odd-otocyon.magic-the-gathering-app"
     },
     "ios": {
-      "bundleIdentifier": "com.odd_otocyon.magic_the_gathering_app",
+      "bundleIdentifier": "com.odd-otocyon.magic-the-gathering-app",
       "supportsTablet": true
     },
     "version": "0.5.0",
