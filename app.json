@@ -10,10 +10,10 @@
       "web"
     ],
     "android": {
-      "package": "com.odd_otocyon.magic_the_gathering_app"
+      "package": "com.oddOtocyon.magicTheGatheringApp"
     },
     "ios": {
-      "bundleIdentifier": "com.odd_otocyon.magic_the_gathering_app",
+      "bundleIdentifier": "com.oddOtocyon.magicTheGatheringApp",
       "supportsTablet": true
     },
     "version": "0.5.0",
@@ -29,6 +29,9 @@
     },
     "assetBundlePatterns": [
       "**/*"
-    ]
-  }
+    ],
+    "entryPoint": "node_modules/expo/AppEntry.js"
+  },
+  "displayName": "Magic The Gathering app",
+  "name": "Magic_The_Gathering_app"
 }
