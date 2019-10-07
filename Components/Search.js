@@ -24,7 +24,10 @@ export default class Search extends React.Component {
 
     // Function passed in SearchField component, it launch Api search request with content of textInput
     _sendSearchRequest = (text) => {
-        this.setState({isLoading: true});
+        this.setState({
+            cards: [],
+            isLoading: true
+        });
 
         searchCardByName(text).then((responseJson) => {
             if(responseJson.object !== "error") {
