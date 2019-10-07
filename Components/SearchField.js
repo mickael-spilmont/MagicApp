@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { searchCardByName } from '../Api/ScryfallApi';
 
 // SearchField integrated in header stack navigator of Search component
 export default class SearchField extends React.Component {
@@ -18,7 +19,7 @@ export default class SearchField extends React.Component {
                     placeholder='Search'
                     placeholderTextColor='#dddddd'
                     onChangeText={(text) => this.setState({text: text})}
-                    onSubmitEditing={() => this.props.searchRequest(this.state.text)}
+                    onSubmitEditing={() => this.props.sendSearchRequest(this.state.text)}
                 />
                 <TouchableOpacity style={styles.button_container}>
                     <Image source={require('../Icons/search_black_36dp.png')} style={styles.search_image} />

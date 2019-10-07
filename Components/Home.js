@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, StyleSheet, View, Text, ActivityIndicator } from 'react-native';
 import { getCardsByDate } from '../Api/ScryfallApi';
-import CardItem from './CardItem';
+import CardsList from './CardsList';
 
 export default class Home extends React.Component {
 
@@ -11,10 +11,6 @@ export default class Home extends React.Component {
             cards: [],
             isLoading: true
         };
-    }
-
-    _goToCardDetails = (card) => {
-        this.props.navigation.navigate('CardDetails', {card: card});
     }
 
     // Call Scryfall Api and set cards state with result, after verify the Api response
@@ -41,26 +37,6 @@ export default class Home extends React.Component {
         }
     }
 
-    // Return CardItem component if item is not udefined, and card have image uris and card is not double faced
-    _displayItem(item) {
-        if(item && item.image_uris && !item.card_faces) {
-            return <CardItem card={item} goToCardDetails={this._goToCardDetails}/>
-        }
-    }
-
-    // Display list of cardItem
-    _displayListOfCards() {
-        if (!this.state.isLoading) {
-            return (
-                <FlatList
-                    data={this.state.cards}
-                    keyExtractor={item => item.id.toString()}
-                    renderItem={({ item }) => this._displayItem(item)}
-                />
-            )
-        }  
-    }
-
     componentDidMount(){
         this._loadCards();
     }
@@ -69,7 +45,7 @@ export default class Home extends React.Component {
         console.log(this.props.navigation);
         return(
             <View style={styles.main_container}>
-                {this._displayListOfCards()}
+                <CardsList cards={this.state.cards} navigation={this.props.navigation}/>
                 {this._displayLoading()}
             </View>
         )
