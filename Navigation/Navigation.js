@@ -34,6 +34,18 @@ const SearchStackNavigator = createStackNavigator(
     {
         Search: {
             screen: Search,
+        },
+        CardDetails: {
+            screen: CardDetails,
+            navigationOptions: {
+                headerStyle: {
+                    backgroundColor: '#2a2b2b',
+                    // remove shadow for Android and IOS
+                    elevation: 0,
+                    borderBottomWidth: 0,
+                },
+                headerTintColor: '#ffffff',
+            }
         }
     }
 )
