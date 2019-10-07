@@ -57,9 +57,13 @@ const styles = StyleSheet.create({
         flex: 1
     },
     activity_container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 100,
+        bottom: 0,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     error_container: {
         flex: 1,

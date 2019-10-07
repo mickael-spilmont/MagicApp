@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, SafeAreaView, TextInput } from 'react-native';
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import SearchField from './SearchField';
 import { searchCardByName } from '../Api/ScryfallApi';
 import CardsList from './CardsList';
@@ -24,12 +24,27 @@ export default class Search extends React.Component {
 
     // Function passed in SearchField component, it launch Api search request with content of textInput
     _sendSearchRequest = (text) => {
-        console.log(`Recherche : ${text}`);
+        this.setState({isLoading: true});
+
         searchCardByName(text).then((responseJson) => {
             if(responseJson.object !== "error") {
-                this.setState({cards: responseJson.data});
+                this.setState({
+                    cards: responseJson.data,
+                    isLoading: false
+                });
             }
         })
+    }
+
+    // Display activity indicator while Api doesn't return response
+    _displayLoading() {
+        if (this.state.isLoading) {
+            return(
+                <View style={styles.activity_container}>
+                    <ActivityIndicator size="large"/>
+                </View>
+            )
+        }
     }
 
     componentDidMount() {
@@ -40,6 +55,7 @@ export default class Search extends React.Component {
         return(
             <View style={styles.main_container}>
                 <CardsList cards={this.state.cards} navigation={this.props.navigation}/>
+                {this._displayLoading()}
             </View>
         )
     }
@@ -48,5 +64,14 @@ export default class Search extends React.Component {
 const styles = StyleSheet.create({
     main_container: {
         flex: 1
+    },
+    activity_container: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 100,
+        bottom: 0,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 })
