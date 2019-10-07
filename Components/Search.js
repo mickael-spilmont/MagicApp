@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, View, Text, SafeAreaView, TextInput } from 'react-native';
 import SearchField from './SearchField'
-import searchCardByNAme from '../Api/ScryfallApi'
+import searchCardByName from '../Api/ScryfallApi'
 
 export default class Search extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {text: ''};
+        this.state = {cards: []};
     }
 
     // Custom header for stack navigator, with search field
@@ -18,7 +18,12 @@ export default class Search extends React.Component {
     }
 
     _searchRequest = (text) => {
-        this.setState({text: text})
+        searchCardByName(text).then((responseJson) => {
+            
+            if(responseJson.object !== "error") {
+                this.setState({ cards: responseJson.data });
+            }
+        });
     }
 
     componentDidMount() {
@@ -28,7 +33,7 @@ export default class Search extends React.Component {
     render() {
         return(
             <View style={styles.main_container}>
-                <Text>{this.state.text}</Text>
+                <Text>{this.state.cards[0].name}</Text>
             </View>
         )
     }

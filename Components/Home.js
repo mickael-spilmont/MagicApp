@@ -19,7 +19,7 @@ export default class Home extends React.Component {
 
     // Call Scryfall Api and set cards state with result, after verify the Api response
     _loadCards() {
-        getCardsByDate(1).then(responseJson => {
+        getCardsByDate(1).then((responseJson) => {
             
             if (responseJson.object !== "error") {
                 this.setState({

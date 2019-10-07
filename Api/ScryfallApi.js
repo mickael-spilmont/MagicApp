@@ -4,7 +4,7 @@ export function getCardsByDate(page) {
         .catch(error => console.error(error));
 }
 
-export function searchCardByNAme(cardName) {
+export function searchCardByName(cardName) {
     return fetch(`https://api.scryfall.com/cards/search?q=${cardName}`)
         .then(response => response.json())
         .catch(error => console.error(error));
