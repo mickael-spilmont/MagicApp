@@ -7,9 +7,9 @@ L'application se connecte à l'API du site [https://scryfall.com](https://scryfa
 ## Roadmap :
 ### Fait :
 * se connecter à l'API pour récupérer les dernières cartes parues, afin de les afficher sur l'écran d'accueil
+* navigation mise en place (via React-NAvigation)
+* recherche de carte
 
 ### À faire :
-* mettre en place la navigation (via React Navigation)
-* mettre en place un système de recherche avec filtres
 * permettre d'enregistrer des cartes en favorit (via Redux)
 * permettre la construction de deck
