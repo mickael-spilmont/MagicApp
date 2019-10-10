@@ -16,12 +16,13 @@ class CardDetails extends React.Component {
         }
     }
 
-    _testButton = () => {
-        console.log("Favorite button pressed !!!");
+    _toggleFavorite = () => {
+        const action = { type: 'TOGGLE_FAVORITE', value: this.props.navigation.getParam('card')};
+        this.props.dispatch(action);
     }
     
     render() {
-        console.log(this.props.favoritesCards);
+        // console.log(this.props.favoritesCards.map(item => item.name));
         const card = this.props.navigation.getParam('card');
         return(
             <View style={styles.main_container}>
