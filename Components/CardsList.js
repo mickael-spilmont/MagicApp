@@ -17,7 +17,6 @@ export default class CardsList extends React.Component {
     }
 
     render() {
-        console.log("CardsList Component !!!");
         return(
             <FlatList
                 data={this.props.cards}

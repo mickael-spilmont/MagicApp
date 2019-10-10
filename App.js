@@ -1,18 +1,14 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Navigation from './Navigation/Navigation';
+import { Provider } from 'react-redux';
+import Store from './Redux/store';
 
 export default function App() {
 
   return (
-    <View style={styles.container}>
+    <Provider store={Store}>
       <Navigation/>
-    </View>
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  }
-});

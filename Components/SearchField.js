@@ -11,7 +11,6 @@ export default class SearchField extends React.Component {
     }
 
     render() {
-        console.log(this.props);
         return(
             <View style={styles.main_container}>
                 <TextInput

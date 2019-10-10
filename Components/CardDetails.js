@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet, Image, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Image, Button } from 'react-native';
+import { connect } from 'react-redux';
 
-export default class CardDetails extends React.Component {
+class CardDetails extends React.Component {
 
     // Verify if card uris exist and display card
     _displayCard() {
@@ -14,16 +15,28 @@ export default class CardDetails extends React.Component {
             return <Text style={styles.missing_text}>Missing Image</Text>
         }
     }
+
+    _testButton = () => {
+        console.log("Favorite button pressed !!!");
+    }
     
     render() {
+        console.log(this.props);
         const card = this.props.navigation.getParam('card');
         return(
             <View style={styles.main_container}>
-                {this._displayCard()}
+                {/* {this._displayCard()} */}
+                <Button title='Toggle Favorite' onPress={() => this._testButton()}/>
             </View>
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return state;
+}
+
+export default connect(mapStateToProps)(CardDetails);
 
 const styles = StyleSheet.create({
     main_container: {
