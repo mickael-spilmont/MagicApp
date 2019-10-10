@@ -9,7 +9,8 @@ L'application se connecte à l'API du site [https://scryfall.com](https://scryfa
 * se connecter à l'API pour récupérer les dernières cartes parues, afin de les afficher sur l'écran d'accueil
 * navigation mise en place (via React-NAvigation)
 * recherche de carte
+* permettre d'enregistrer des cartes en favorit (via Redux)
 
 ### À faire :
-* permettre d'enregistrer des cartes en favorit (via Redux)
+
 * permettre la construction de deck
