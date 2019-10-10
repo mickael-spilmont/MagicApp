@@ -1,5 +1,3 @@
-import { isTemplateElement } from "@babel/types";
-
 const initialState = { favoritesCards: [] };
 
 export default function toggleFavorite(state = initialState, action) {

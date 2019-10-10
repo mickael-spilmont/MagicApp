@@ -21,7 +21,7 @@ class CardDetails extends React.Component {
     }
     
     render() {
-        console.log(this.props);
+        console.log(this.props.favoritesCards);
         const card = this.props.navigation.getParam('card');
         return(
             <View style={styles.main_container}>
@@ -33,7 +33,9 @@ class CardDetails extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return state;
+    return {
+        favoritesCards: state.favoritesCards
+    };
 }
 
 export default connect(mapStateToProps)(CardDetails);
