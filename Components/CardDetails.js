@@ -1,8 +1,25 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Button } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import FavoriteButton from './FavoriteButton';
 
 class CardDetails extends React.Component {
+
+    // Custom header for stack navigator, with search field
+    static navigationOptions = ({ navigation }) => {
+        return {
+            headerRight: <FavoriteButton toggleFavorite={navigation.getParam('toggleFavorite')}/>
+        }
+    }
+
+    _displayHeaderFavoriteButton() {
+        console.log(this._toggleFavorite);
+        return(
+            <TouchableOpacity onPress={() => this._toggleFavorite()}>
+                <Text>Add favorite</Text>
+            </TouchableOpacity>
+        )
+    }
 
     // Verify if card uris exist and display card
     _displayCard() {
@@ -20,14 +37,20 @@ class CardDetails extends React.Component {
         const action = { type: 'TOGGLE_FAVORITE', value: this.props.navigation.getParam('card')};
         this.props.dispatch(action);
     }
+
+    componentDidMount() {
+        this.props.navigation.setParams({
+            toggleFavorite: this._toggleFavorite
+        });
+    }
     
     render() {
-        // console.log(this.props.favoritesCards.map(item => item.name));
+        console.log(this.props.favoritesCards.map(item => item.name));
         const card = this.props.navigation.getParam('card');
         return(
             <View style={styles.main_container}>
-                {/* {this._displayCard()} */}
-                <Button title='Toggle Favorite' onPress={() => this._testButton()}/>
+                {this._displayCard()}
+                {/* <Button title='Toggle Favorite' onPress={() => this._toggleFavorite()}/> */}
             </View>
         )
     }
