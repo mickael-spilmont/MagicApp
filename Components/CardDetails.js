@@ -3,12 +3,12 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import FavoriteButton from './FavoriteButton';
 
-class CardDetails extends React.Component {
+export default class CardDetails extends React.Component {
 
     // Custom header for stack navigator, with search field
     static navigationOptions = ({ navigation }) => {
         return {
-            headerRight: <FavoriteButton toggleFavorite={navigation.getParam('toggleFavorite')}/>
+            headerRight: <FavoriteButton card={navigation.getParam('card')}/>
         }
     }
 
@@ -33,19 +33,13 @@ class CardDetails extends React.Component {
         }
     }
 
-    _toggleFavorite = () => {
-        const action = { type: 'TOGGLE_FAVORITE', value: this.props.navigation.getParam('card')};
-        this.props.dispatch(action);
-    }
-
     componentDidMount() {
         this.props.navigation.setParams({
-            toggleFavorite: this._toggleFavorite
+            card: this.props.navigation.getParam('card')
         });
     }
     
     render() {
-        console.log(this.props.favoritesCards.map(item => item.name));
         const card = this.props.navigation.getParam('card');
         return(
             <View style={styles.main_container}>
@@ -55,14 +49,6 @@ class CardDetails extends React.Component {
         )
     }
 }
-
-const mapStateToProps = (state) => {
-    return {
-        favoritesCards: state.favoritesCards
-    };
-}
-
-export default connect(mapStateToProps)(CardDetails);
 
 const styles = StyleSheet.create({
     main_container: {
