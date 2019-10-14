@@ -22,7 +22,6 @@ class FavoriteButton extends React.Component {
     }
 
     render() {
-        console.log(this.props.favoritesCards.map(item => item.name));
         return(
             <TouchableOpacity style={styles.main_container} onPress={() => this._toggleFavorite()}>
                 {this._displayFavoriteIcon()}

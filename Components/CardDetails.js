@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { connect } from 'react-redux';
 import FavoriteButton from './FavoriteButton';
 
 export default class CardDetails extends React.Component {

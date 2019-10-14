@@ -6,13 +6,14 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Home from '../Components/Home';
 import CardDetails from '../Components/CardDetails';
 import Search from '../Components/Search';
+import FavoriteCards from '../Components/FavoriteCards';
 
 const HomeStackNavigator = createStackNavigator(
     {
         Home: {
             screen: Home,
             navigationOptions: {
-                title: "Latest Magic cards",
+                title: 'Latest Magic cards',
             }
         },
         CardDetails: {
@@ -33,7 +34,7 @@ const HomeStackNavigator = createStackNavigator(
 const SearchStackNavigator = createStackNavigator(
     {
         Search: {
-            screen: Search,
+            screen: Search
         },
         CardDetails: {
             screen: CardDetails,
@@ -45,6 +46,17 @@ const SearchStackNavigator = createStackNavigator(
                     borderBottomWidth: 0,
                 },
                 headerTintColor: '#ffffff',
+            }
+        }
+    }
+)
+
+const FavoriteStackNavigator = createStackNavigator (
+    {
+        FavoriteCards: {
+            screen: FavoriteCards,
+            navigationOptions: {
+                title: 'Favorites Cards'
             }
         }
     }
@@ -65,6 +77,14 @@ const AppTabNavigator = createBottomTabNavigator(
             navigationOptions: {
                 tabBarIcon: () => {
                     return <Image source={require('../Icons/search_black_36dp.png')} style={styles.menu_icon}/>
+                }
+            }
+        },
+        FavoriteCards: {
+            screen: FavoriteStackNavigator,
+            navigationOptions: {
+                tabBarIcon: () => {
+                    return <Image source={require('../Icons/baseline_favorite_black_36dp.png')} style={styles.menu_icon}/>
                 }
             }
         }
