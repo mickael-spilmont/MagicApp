@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Home from '../Components/Home';
 import CardDetails from '../Components/CardDetails';
 import Search from '../Components/Search';
-import FavoriteCards from '../Components/FavoriteCards';
+import FavoritesCards from '../Components/FavoritesCards';
 
 const HomeStackNavigator = createStackNavigator(
     {
@@ -53,10 +53,22 @@ const SearchStackNavigator = createStackNavigator(
 
 const FavoriteStackNavigator = createStackNavigator (
     {
-        FavoriteCards: {
-            screen: FavoriteCards,
+        FavoritesCards: {
+            screen: FavoritesCards,
             navigationOptions: {
                 title: 'Favorites Cards'
+            }
+        },
+        CardDetails: {
+            screen: CardDetails,
+            navigationOptions: {
+                headerStyle: {
+                    backgroundColor: '#2a2b2b',
+                    // remove shadow for Android and IOS
+                    elevation: 0,
+                    borderBottomWidth: 0,
+                },
+                headerTintColor: '#ffffff',
             }
         }
     }
@@ -80,7 +92,7 @@ const AppTabNavigator = createBottomTabNavigator(
                 }
             }
         },
-        FavoriteCards: {
+        FavoritesCards: {
             screen: FavoriteStackNavigator,
             navigationOptions: {
                 tabBarIcon: () => {
