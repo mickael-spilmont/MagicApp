@@ -19,7 +19,7 @@ export default class SearchField extends React.Component {
           onChangeText={(text) => this.setState({ text: text })}
           onSubmitEditing={() => this.props.sendSearchRequest(this.state.text)}
         />
-        <TouchableOpacity style={styles.button_container}>
+        <TouchableOpacity style={styles.button_container} onPress={() => this.props.sendSearchRequest(this.state.text)}>
           <Image source={require('../Icons/search_black_36dp.png')} style={styles.search_image} />
         </TouchableOpacity>
       </View>
@@ -44,10 +44,12 @@ const styles = StyleSheet.create({
     borderColor: '#525954'
   },
   button_container: {
-    marginRight: 20
+    marginRight: 20,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   search_image: {
-    width: 24,
-    height: 24
+    width: 32,
+    height: 32
   }
 });
